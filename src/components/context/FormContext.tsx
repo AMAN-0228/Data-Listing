@@ -1,11 +1,11 @@
 import { ReactNode, createContext, useState, useContext } from "react";
-import { typeFormContext, FormDetail } from "../../types/Types";
+import { typeFormContext, FormDetail,  } from "../../types/Types";
 
 export type FormProviderProps = {
     children: ReactNode
 }
 
-const initialState: FormDetail = {
+const initialState:FormDetail = {
     name: '',
     email: '',
     phoneNo: 9876543210,
@@ -15,12 +15,15 @@ export const FormContext = createContext<typeFormContext >({formDetails:initialS
 
 
 export const FormContextProvider = ({children}: FormProviderProps) => {
-    const [formDetails, setFormDetails] = useState<FormDetail>(initialState);
+    // const [state, dispatch] = useReducer(reducer, initialState);
+    const [formDetails, setFormDetails] = useState(initialState);
     const handleSubmit = (event:  React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        console.log("on submit",formDetails)
         localStorage.setItem("Form Details", JSON.stringify(formDetails))
         setFormDetails(prev => { return {...prev,isFiled: true } })
         console.log("submit")
+        console.log(formDetails.isFiled)
     }
     const updateValue = (event:React.ChangeEvent<HTMLInputElement>) => {
         const name: string = event.target.name

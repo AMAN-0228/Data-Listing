@@ -1,12 +1,16 @@
 import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import  { useFromContext } from './context/FormContext';
+import { Navigate } from 'react-router-dom';
 
 const DetailForm = () => {
   
   const {updateValue,handleSubmit,formDetails} = useFromContext()
-  const {name,email} = formDetails
+  const {name,email,isFiled} = formDetails
   // const {updateValue,handleSubmit,formDetails} = useContext(FormContext)
+  if(isFiled){
+    return <Navigate to='/'/>
+  }
   return (
     <Box
       sx={{
@@ -23,7 +27,7 @@ const DetailForm = () => {
         <input type="email" name="email" id="email" value={email} required onChange={updateValue}/>
         <label htmlFor="phoneNo">Phone No :</label>
         <input type="tel" name="phoneNo" id="phoneNo" pattern="[6-9]{1}[0-9]{9}" required onChange={updateValue}/>
-        <Button type='submit' variant="contained" >Outlined</Button>
+        <Button type='submit' variant="contained" onClick={()=>{console.log(formDetails)}}>Outlined</Button>
       </form>
     </Box>
 
