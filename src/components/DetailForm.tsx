@@ -27,7 +27,7 @@ const DetailForm = () => {
         <input type="email" name="email" id="email" value={email} required onChange={updateValue}/>
         <label htmlFor="phoneNo">Phone No :</label>
         <input type="tel" name="phoneNo" id="phoneNo" pattern="[6-9]{1}[0-9]{9}" required onChange={updateValue}/>
-        <Button type='submit' variant="contained" onClick={()=>{console.log(formDetails)}}>Outlined</Button>
+        <Button type='submit' variant="contained">Outlined</Button>
       </form>
     </Box>
 
