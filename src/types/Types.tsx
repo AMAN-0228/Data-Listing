@@ -8,10 +8,8 @@ export type actionType = {
     payload?: object
 }
 
-export type ReducerHook = {
-    state: FormDetail;
-    dispatch : (type :string,payload?:object)=> void;
-}
+// export default dispatchType={}
+
 // type for form 
 export type FormDetail = {
     name: string
@@ -26,18 +24,21 @@ export type typeFormContext = {
 }
 
 // interface for user data 
-export interface userData {
+export type userData = {
     userId : number
     id : number
     title : string
     body : string
 }
-
-export interface CompleteData {
+export type AllData = {
+    data : userData[]
+}
+export type CompleteData ={
     data : userData[],
     is_Error : boolean,
     is_Loading : boolean,
 }
+
 
 export enum DataActionType{
     "SET_DATA",
@@ -58,4 +59,14 @@ export interface LoadAction{
 }
 
 export type DataAction = SetAction | ErrorAction | LoadAction
-// export type formReducer )
+
+
+export type dispatchType = () => CompleteData
+
+//   filter type
+export interface singleFilterData {
+    department: string,
+        sub_departments: string[]
+}
+
+export type FullFilterData = singleFilterData[]

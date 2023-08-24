@@ -1,49 +1,46 @@
-import {createContext, useEffect, useReducer} from 'react'
-import { ChildrenType, CompleteData, userData } from '../../types/Types';
+import {createContext, useEffect, useState, useContext} from 'react'
+import { AllData, ChildrenType } from '../../types/Types';
 import { useFromContext } from './FormContext';
-import reducer from '../reducer/DataReducer'
+// import reducer from '../reducer/DataReducer'
 
 
-const initialState:CompleteData = {
-    data : [],
-    is_Error : false,
-    is_Loading : false,
+// const initialState:CompleteData = {
+//     data : [],
+//     is_Error : false,
+//     is_Loading : false,
+// }
+
+const inital :AllData = {
+    data : []
 }
 
-export const DataContext = createContext<CompleteData>(initialState);
+// export const DataContext = createContext<CompleteData>(initialState);
+export const DataContext = createContext<AllData>(inital);
 
 export const DataContextProvider = ({children}:ChildrenType)=>{
-    
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const [content, setContent] = useState(inital);
+    // const [state, dispatch] = useReducer(reducer, initialState);
     const {formDetails}=useFromContext()
     const fetchData = ()=>{
         fetch("https://jsonplaceholder.typicode.com/posts")
         .then(res=>res.json())
-        .then(res=>console.log(res))
+        .then(res=>setContent({data:[...res]}))
+        // console.log(content)
     }
-    const getapi = async()=>{
-        try {
-            dispatch({type : })
-            const res = await fetch("https://jsonplaceholder.typicode.com/posts")
-            const result =  res.json()
-        } catch (error) {
-            
-        }
-        
-        console.log(res.json)
-        console.log(result)
-    }
+  
     useEffect(()=>{
         // getapi()
         console.log(formDetails)
         fetchData();
-    },[])
+    },[formDetails])
     return (
-        <DataContext.Provider value={{state}}>
+        <DataContext.Provider value={content}>
             {children}
         </DataContext.Provider>
     )
 }
 
-
+export const useDataContext = ()=>{
+    return useContext(DataContext)
+}
 
