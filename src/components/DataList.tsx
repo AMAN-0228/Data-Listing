@@ -16,7 +16,7 @@ const DataList = () => {
   return (
     <Container >
         <TableContainer component={Paper}>
-      <Table style={{ width: "100%",textAlign:"left" }} aria-label="customized table">
+      <Table style={{ width: "100%",textAlign:"left"}} aria-label="customized table">
         <TableHead>
           <TableRow style={{textAlign:"center"}}>
             <StyledTableCell>id</StyledTableCell>
